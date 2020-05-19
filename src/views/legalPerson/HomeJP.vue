@@ -61,8 +61,8 @@ export default {
 <style scoped>
 
 .money {
-margin-left: 35px;
-margin-right: 35px;
+margin-left: 50px;
+margin-right: 50px;
 }
 
 .whiteColor {
@@ -129,8 +129,8 @@ display: flex;
 }
 .rotate2{
     transform: rotateZ(220deg);
-    margin-left: 35px;
-    margin-right: 35px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 </style>
