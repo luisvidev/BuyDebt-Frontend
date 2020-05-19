@@ -46,6 +46,24 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: "/registerDebt",
+    name: "registerDebt",
+    component: () => import("../views/legalPerson/RegisterDebt.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+
+  {
+    path: "/listActivities",
+    name: "listActivities",
+    component: () => import("../views/legalPerson/TabActivities.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+
 ];
 
 const router = new VueRouter({
