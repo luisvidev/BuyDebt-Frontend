@@ -91,6 +91,7 @@ export default {
             this.$store.commit("updateUser", this.email);
             this.$store.commit("updateRol", rol);
             this.$store.commit("saveToken", token);
+            this.$store.commit("updatePassword", this.password);
 
             this.overlay = false;
             if (rol == "natural person") {

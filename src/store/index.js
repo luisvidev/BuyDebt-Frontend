@@ -9,6 +9,7 @@ export default new Vuex.Store({
     token: "",
     currentRol: "",
     userEmail: "",
+    password: "",
   },
   mutations: {
     changeNavBar(state, number) {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     updateUser(state, user) {
       state.userEmail = user;
+    },
+    updatePassword(state, passwrod) {
+      state.password = password;
     },
   },
   actions: {},
