@@ -47,6 +47,22 @@ const routes = [
     },
   },
   {
+    path: "/registerDebt",
+    name: "registerDebt",
+    component: () => import("../views/legalPerson/RegisterDebt.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/listActivities",
+    name: "listActivities",
+    component: () => import("../views/legalPerson/TabActivities.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: "/changePassword",
     name: "ChangePassword",
     component: () => import("../views/loginRegister/ChangePassword.vue"),
