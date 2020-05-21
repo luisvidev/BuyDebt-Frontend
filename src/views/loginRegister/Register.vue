@@ -55,7 +55,10 @@
 
 <script>
 export default {
-  name: "Register"
+  name: "Register",
+  created() {
+    this.$store.commit("changeNavBar", 1);
+  },
 };
 </script>
 
