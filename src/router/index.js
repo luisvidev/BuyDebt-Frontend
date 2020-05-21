@@ -67,7 +67,7 @@ const routes = [
     name: "ChangePassword",
     component: () => import("../views/loginRegister/ChangePassword.vue"),
     meta: {
-      //requiresAuth: true,
+      requiresAuth: true,
     },
   },
 ];

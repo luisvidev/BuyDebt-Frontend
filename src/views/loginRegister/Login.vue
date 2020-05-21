@@ -46,7 +46,7 @@
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
         <v-card-title class="headline">Error al iniciar sesión</v-card-title>
-        <v-card-text>{{messageError}}</v-card-text>
+        <v-card-text>{{ messageError }}</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" text @click="dialog = false">Aceptar</v-btn>
@@ -95,8 +95,10 @@ export default {
 
             this.overlay = false;
             if (rol == "natural person") {
+              this.$store.commit("changeNavBar", 2);
               this.$router.push("/homeNaturalPerson");
             } else {
+              this.$store.commit("changeNavBar", 3);
               this.$router.push("/homeJudicialPerson");
             }
           }
