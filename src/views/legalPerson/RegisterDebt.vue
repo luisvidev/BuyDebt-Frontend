@@ -28,7 +28,7 @@
 
             <v-row>
               <v-col  class="headline font-weight-light">Valor de la deuda</v-col>
-              <v-text-field v-model="valueDebt" name="valueDebt" type="text" outlined></v-text-field>
+              <v-text-field v-model="valueDebt" name="valueDebt" type="number" outlined></v-text-field>
             </v-row>
 
              <v-row>
@@ -38,7 +38,12 @@
 
              <v-row>
               <v-col  class="headline font-weight-light">Valor dispuesto a recibir</v-col>
-              <v-text-field v-model="valueReceive" name="valueReceive" type="text" outlined></v-text-field>
+              <v-text-field v-model="valueReceive" name="valueReceive" type="number" outlined></v-text-field>
+            </v-row>
+
+             <v-row>
+              <v-col  class="headline font-weight-light">Categoria</v-col>
+              <v-text-field v-model="category" name="category" type="text" outlined></v-text-field>
             </v-row>
             
 
@@ -48,7 +53,7 @@
           <v-card-actions>
             <v-row justify="space-around" class="mb-5">
             
-              <v-btn color="purple whiteColor" to="/listActivities" large >Publicar venta deuda</v-btn>
+              <v-btn color="purple whiteColor" @click="register" large >Publicar venta deuda</v-btn>
             </v-row>
           </v-card-actions>
         </v-card>
@@ -61,11 +66,58 @@
 </template>
 
 <script>
+import axios from "@/plugins/axios";
+
 export default {
   name: "RegisterDebt",
-  created() {
-    this.$store.commit("changeNavBar", 0);
+
+  data(){
+    return {
+      nameDebt:"",
+      debtor:"",
+      valueDebt:"",
+      datePay:"",
+      valueReceive:"",
+      category:""
+
+
+    };
   },
+  methods:{
+     async register() {
+
+        console.log(this.nameDebt, this.debtor,this.valueDebt, this.datePay,this.valueReceive);
+
+        let debt = {
+          //id:1,
+          namedebt: this.nameDebt,
+          debtor: this.debtor,
+          valuedebt: this.valueDebt,
+          datepay: this.datePay,
+          valuereceive: this.valueReceive,
+          state: "",
+          category: this.category,
+          requests:0,
+          userid:this.$store.state.userEmail
+        };
+        try{
+           var response = await axios.post(
+              "/debts/debt",
+              debt
+            );
+            this.$router.push("/listActivities");
+        }catch(error){
+
+        }
+        
+
+     }
+  },
+  created() {
+    this.$store.commit("changeNavBar", 3);
+  },
+
+
 };
 </script>
 
