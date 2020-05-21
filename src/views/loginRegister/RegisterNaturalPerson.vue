@@ -18,12 +18,7 @@
           </v-row>
         </v-toolbar>
 
-        <v-form
-          ref="form"
-          v-model="valid"
-          :lazy-validation="lazy"
-          class="mx-10 my-10"
-        >
+        <v-form ref="form" v-model="valid" :lazy-validation="lazy" class="mx-10 my-10">
           <v-select
             v-model="select"
             :items="documents"
@@ -39,19 +34,9 @@
             required
           ></v-text-field>
 
-          <v-text-field
-            v-model="name"
-            :rules="nameRules"
-            label="Nombre completo"
-            required
-          ></v-text-field>
+          <v-text-field v-model="name" :rules="nameRules" label="Nombre completo" required></v-text-field>
 
-          <v-text-field
-            v-model="email"
-            :rules="emailRules"
-            label="E-mail"
-            required
-          ></v-text-field>
+          <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
 
           <v-text-field
             v-model="password1"
@@ -88,31 +73,35 @@
             required
           ></v-checkbox>
 
-          <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="register"
-            >Registrar</v-btn
-          >
+          <v-btn :disabled="!valid" color="success" class="mr-4" @click="register">Registrar</v-btn>
         </v-form>
       </v-card>
     </v-row>
+
+    <v-dialog v-model="dialog2" max-width="290">
+      <v-card>
+        <v-card-title class="headline">¡Registro éxitoso!</v-card-title>
+
+        <v-card-text>La persona se ha registrado exitosamente. Ya puede iniciar sesión.</v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn color="green darken-1" text to="/login">Aceptar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
         <v-card-title class="headline">{{ titleDialog }}</v-card-title>
 
-        <v-card-text>
-          {{ messageDialog }}
-        </v-card-text>
+        <v-card-text>{{ messageDialog }}</v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn color="green darken-1" text @click="dialog = false">
-            Aceptar
-          </v-btn>
+          <v-btn color="green darken-1" text @click="dialog = false">Aceptar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -131,6 +120,7 @@ export default {
   data() {
     return {
       overlay: false,
+      dialog2: false,
       dialog: false,
       titleDialog: "",
       messageDialog: "",
@@ -138,25 +128,25 @@ export default {
       select: null,
       documents: ["cedula de ciudadania", "Pasaprte"],
       documentNumber: "",
-      documentRules: [(v) => !!v || "El número del documento es requerido"],
+      documentRules: [v => !!v || "El número del documento es requerido"],
       name: "",
-      nameRules: [(v) => !!v || "El nombre es requerido"],
+      nameRules: [v => !!v || "El nombre es requerido"],
       email: "",
       emailRules: [
-        (v) => !!v || "El correo electrónico es requerido",
-        (v) => /.+@.+\..+/.test(v) || "El correo electrónico debe ser válido",
+        v => !!v || "El correo electrónico es requerido",
+        v => /.+@.+\..+/.test(v) || "El correo electrónico debe ser válido"
       ],
       show1: false,
       show2: false,
       password1: "Password",
       password2: "Password",
       passwordRules: {
-        required: (value) => !!value || "La contraseña debe ser requerida",
-        min: (v) => v.length >= 5 || "Mínimo 5 caracteres",
-        equals: (v) => v == this.password1 || "Las contraseñas no coinciden",
+        required: value => !!value || "La contraseña debe ser requerida",
+        min: v => v.length >= 5 || "Mínimo 5 caracteres",
+        equals: v => v == this.password1 || "Las contraseñas no coinciden"
       },
       checkbox: false,
-      lazy: false,
+      lazy: false
     };
   },
   methods: {
@@ -168,7 +158,7 @@ export default {
           rol: "natural person",
           type_document: this.select,
           number_document: this.number_document,
-          full_name: this.name,
+          full_name: this.name
         };
         this.overlay = true;
         try {
@@ -187,7 +177,8 @@ export default {
               this.email +
               " ya se encuentra registrado en la aplicación.";
             this.overlay = false;
-            this.$router.push("/login");
+            this.dialog2 = true;
+            //this.$router.push("/login");
           } else {
             this.titleDialog = "Error en el registro";
             this.messageDialog =
@@ -211,8 +202,8 @@ export default {
           "Las contraseñas no coinciden. Por favor, digitelas de nuevo.";
         this.dialog = true;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

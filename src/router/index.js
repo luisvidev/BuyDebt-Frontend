@@ -54,7 +54,6 @@ const routes = [
       requiresAuth: true,
     },
   },
-
   {
     path: "/listActivities",
     name: "listActivities",
@@ -63,7 +62,14 @@ const routes = [
       requiresAuth: true,
     },
   },
-
+  {
+    path: "/changePassword",
+    name: "ChangePassword",
+    component: () => import("../views/loginRegister/ChangePassword.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
