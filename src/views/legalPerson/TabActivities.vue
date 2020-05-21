@@ -23,7 +23,7 @@
            
           <v-card>
             <v-card-title>
-              <span class="headline">{{ formTitle }}</span>
+              <span class="headline">Detalle</span>
             </v-card-title>
             <h1></h1>
             <v-card-text>
@@ -52,7 +52,7 @@
                   
               </v-spacer>
               <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+              
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -98,35 +98,25 @@
 </template>
 
 <script>
+import axios from "@/plugins/axios";
 export default {
   name: "TabActivities",
   created() {
     this.$store.commit("changeNavBar", 0);
-    this.desserts=[
-        {id:"1",
-         name:"hola",
-         valueDebt:"2000",
-         request:"2",
-         state:"Pendiente",
-        },
-         {id:"2",
-         name:"hola",
-         valueDebt:"2000",
-         request:"2",
-         state:"Pendiente",
-        },
-         {id:"3",
-         name:"hola",
-         valueDebt:"2000",
-         request:"2",
-         state:"Pendiente",
-        },
-
-
-    ]
+   
+    this.initialize();
   },
 
   methods:{
+      close() {
+      this.dialog = false;
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      }, 300);
+    },
+
+    
 
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
@@ -134,6 +124,36 @@ export default {
       this.dialog = true;
       this.idItem=item.id;
     },
+
+    async initialize(){
+      this.desserts=[];
+
+      var debts = await axios.get("/debts/" + this.$store.state.userEmail);
+     
+     if(debts.data.debts.length>0){
+      var array=debts.data.debts;
+      console.log(debts.data);
+      console.log(debts);
+      console.log(array.length);
+
+      array.forEach(element => {
+         const data={
+                'id':element.id,
+                'name':element.namedebt,
+                'valueDebt':element.valuedebt,
+                'request':element.requests,
+                'state':element.state
+               
+            }
+        this.desserts.push(data);
+      });
+     }else{
+        this.desserts=[];
+     }
+   
+ 
+    }
+
   },
 
   data: () => ({
