@@ -59,7 +59,7 @@
       <v-toolbar-title>Persona judicial</v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <v-btn text large @click="goLogin">Inicio</v-btn>
+      <v-btn text large to="/homeJudicialPerson">Inicio</v-btn>
 
       <v-btn text large to="/listActivities">Mis actividades</v-btn>
 
