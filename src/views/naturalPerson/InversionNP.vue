@@ -3,7 +3,7 @@
     <v-container grid-list-md>
       <v-layout row wrap>
         <v-flex xs6>
-          <v-text-field v-model="label" label="Search" append-icon="search"></v-text-field>
+          <v-text-field v-model="label" label="Search by category" append-icon="search"></v-text-field>
         </v-flex>
         <v-flex xs2>
           <img src="../../assets/logo.png" />
