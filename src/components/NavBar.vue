@@ -61,7 +61,7 @@
 
       <v-btn text large @click="goLogin">Inicio</v-btn>
 
-      <v-btn text large>Mis actividades</v-btn>
+      <v-btn text large to="/listActivities">Mis actividades</v-btn>
 
       <v-btn text large>Mi perfil</v-btn>
 

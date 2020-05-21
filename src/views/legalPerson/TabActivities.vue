@@ -102,7 +102,7 @@ import axios from "@/plugins/axios";
 export default {
   name: "TabActivities",
   created() {
-    this.$store.commit("changeNavBar", 0);
+   // this.$store.commit("changeNavBar", 0);
    
     this.initialize();
   },

@@ -114,7 +114,7 @@ export default {
      }
   },
   created() {
-    this.$store.commit("changeNavBar", 3);
+    //this.$store.commit("changeNavBar", 3);
   },
 
 
