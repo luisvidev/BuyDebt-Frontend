@@ -62,6 +62,16 @@ const routes = [
       requiresAuth: true,
     },
   },
+
+  {
+    path: "/listProducts",
+    name: "listProducts",
+    component: () => import("../views/naturalPerson/InversionNP.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+
   {
     path: "/changePassword",
     name: "ChangePassword",
