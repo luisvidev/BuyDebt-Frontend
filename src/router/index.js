@@ -30,12 +30,77 @@ const routes = [
     component: () =>
       import("../views/loginRegister/RegisterJudicialPerson.vue"),
   },
+  {
+    path: "/homeNaturalPerson",
+    name: "HomeNaturalPerson",
+    component: () => import("../views/naturalPerson/HomeNP.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/homeJudicialPerson",
+    name: "HomeJudicialPerson",
+    component: () => import("../views/legalPerson/HomeJP.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/registerDebt",
+    name: "registerDebt",
+    component: () => import("../views/legalPerson/RegisterDebt.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/listActivities",
+    name: "listActivities",
+    component: () => import("../views/legalPerson/TabActivities.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+
+  {
+    path: "/listProducts",
+    name: "listProducts",
+    component: () => import("../views/naturalPerson/InversionNP.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+
+  {
+    path: "/changePassword",
+    name: "ChangePassword",
+    component: () => import("../views/loginRegister/ChangePassword.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (localStorage.getItem("jwt") == null) {
+      next({
+        path: "/login",
+        params: { nextUrl: to.fullPath },
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

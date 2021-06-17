@@ -14,10 +14,13 @@ export default {
   name: "App",
 
   components: {
-    NavBar,
+    NavBar
+  },
+  created() {
+    this.$store.commit("changeNavBar", 0);
   },
   data: () => ({
     //
-  }),
+  })
 };
 </script>
